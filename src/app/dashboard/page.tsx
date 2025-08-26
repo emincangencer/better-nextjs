@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { useSession } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const DashboardPage = () => {
   const { data: session, isPending } = useSession();
@@ -16,11 +17,16 @@ const DashboardPage = () => {
   }, [session, isPending, router]);
 
   if (isPending || !session?.user) {
-    return <div className="flex min-h-screen items-center justify-center">Loading...</div>; // Or a loading spinner
+    return (
+      <div className="flex flex-col items-center justify-center p-4">
+        <Skeleton className="h-10 w-64 mb-4" />
+        <Skeleton className="h-6 w-80" />
+      </div>
+    );
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-24">
+    <div className="flex flex-col items-center justify-center p-4">
       <h1 className="text-4xl font-bold">Dashboard Page</h1>
       <p>Welcome to your dashboard!</p>
     </div>

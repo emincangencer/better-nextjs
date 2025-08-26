@@ -30,11 +30,11 @@ const Header = () => {
         {session?.user ? (
           <div className="flex items-center space-x-4">
             <Link href="/dashboard">
-              <Button variant="ghost">Dashboard</Button>
+              <Button variant="ghost" className="cursor-pointer">Dashboard</Button>
             </Link>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                <Button variant="ghost" className="relative h-8 w-8 rounded-full cursor-pointer">
                   <Avatar className="h-8 w-8">
                     <AvatarImage src={session.user.image || ''} alt={session.user.name || ''} />
                     <AvatarFallback>{session.user.name?.charAt(0) || 'U'}</AvatarFallback>
