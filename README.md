@@ -24,7 +24,7 @@ This is a Next.js 15 starter project designed for rapid development with a focus
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/your-username/better-nextjs.git
+    git clone https://github.com/emincangencer/better-nextjs.git
     cd better-nextjs
     ```
 
