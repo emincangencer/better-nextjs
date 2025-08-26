@@ -1,36 +1,18 @@
-'use client';
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
-import React, { useEffect } from 'react';
-import { useSession } from '@/lib/auth-client';
-import { useRouter } from 'next/navigation';
-import { Skeleton } from '@/components/ui/skeleton';
+export default async function DashboardPage() {
+  const session = await auth.api.getSession({ headers: await headers() });
 
-const DashboardPage = () => {
-  const { data: session, isPending } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (isPending) return; // Do nothing while loading
-    if (!session?.user) {
-      router.push('/sign-in');
-    }
-  }, [session, isPending, router]);
-
-  if (isPending || !session?.user) {
-    return (
-      <div className="flex flex-col items-center justify-center p-4">
-        <Skeleton className="h-10 w-64 mb-4" />
-        <Skeleton className="h-6 w-80" />
-      </div>
-    );
+  if (!session) {
+    redirect("/sign-in");
   }
 
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <h1 className="text-4xl font-bold">Dashboard Page</h1>
-      <p>Welcome to your dashboard!</p>
+      <p>Welcome to your dashboard, {session.user.email}!</p>
     </div>
   );
-};
-
-export default DashboardPage;
+}
